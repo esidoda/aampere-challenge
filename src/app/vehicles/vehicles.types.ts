@@ -1,3 +1,5 @@
+import { AvailableItem, Filter } from "../types/Filters";
+
 export interface Vehicle {
   brand: string;
   model: string;
@@ -26,4 +28,19 @@ export interface VehicleResponse {
 export interface VehicleTableColumn {
   header: string;
   propertyKey: keyof Vehicle;
+  isSortable?: boolean;
+}
+
+export interface SortConfig<T> {
+  key: keyof T | null;
+  direction: "asc" | "desc" | null;
+}
+
+export interface FiltersResponse {
+  locations: string[];
+}
+
+export interface VehicleFilters {
+  brand: string | null;
+  location: string;
 }
