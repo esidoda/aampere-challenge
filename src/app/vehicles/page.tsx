@@ -8,6 +8,7 @@ import Table from "./components/VehiclesTable";
 import { VehicleTableColumn } from "./vehicles.types";
 import { useFilter } from "./hooks/useVehiclesFilter";
 import Pagination from "../components/Pagination";
+import { useRouter } from "next/navigation";
 
 const VehicleListing = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -51,7 +52,7 @@ const VehicleListing = () => {
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    setPaginatedVehicles(filteredVehicles.slice(startIndex, endIndex)); // Slice the filtered vehicles based on current page
+    setPaginatedVehicles(filteredVehicles.slice(startIndex, endIndex));
   }, [filteredVehicles, currentPage]);
 
   const handlePageChange = (page: number) => {
@@ -60,6 +61,12 @@ const VehicleListing = () => {
 
   const totalPages = Math.ceil(filteredVehicles.length / itemsPerPage);
 
+  const router = useRouter();
+
+  const vehicleDetailsLink = (id: number) => {
+    router.push(`/vehicles/${id}`);
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -67,7 +74,11 @@ const VehicleListing = () => {
       <h1 className="text-2xl font-bold mb-6">List of Vehicles</h1>
       <Filters filters={filters} setFilters={setFilters} />
       {!hasNoData ? (
-        <Table columns={tableColumns} data={paginatedVehicles} />
+        <Table
+          columns={tableColumns}
+          data={paginatedVehicles}
+          detailsLink={vehicleDetailsLink}
+        />
       ) : (
         <div>No vehicles available</div>
       )}

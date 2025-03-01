@@ -1,6 +1,7 @@
 import { AvailableItem, Filter } from "../types/Filters";
 
 export interface Vehicle {
+  id: number;
   brand: string;
   model: string;
   year: number;

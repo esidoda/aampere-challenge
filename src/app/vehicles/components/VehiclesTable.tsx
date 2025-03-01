@@ -6,9 +6,10 @@ import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
 interface TableProps {
   columns: VehicleTableColumn[];
   data: Vehicle[];
+  detailsLink: (id: number) => void;
 }
 
-const VehicleTable = ({ columns, data }: TableProps) => {
+const VehicleTable = ({ columns, data, detailsLink }: TableProps) => {
   const { sortedItems, handleSort, sortConfig } = useSort<Vehicle>(data);
   return (
     <div className="overflow-x-auto">
@@ -45,7 +46,11 @@ const VehicleTable = ({ columns, data }: TableProps) => {
         </thead>
         <tbody>
           {sortedItems.map((row, rowIndex) => (
-            <tr key={rowIndex} className="bg-white border-b border-gray-200">
+            <tr
+              key={rowIndex}
+              className="bg-white border-b border-gray-200 cursor-pointer hover:bg-gray-100"
+              onClick={() => detailsLink(row.id)}
+            >
               {columns.map((column, colIndex) => (
                 <td key={colIndex} className="px-4 py-2">
                   {row[column.propertyKey]}
