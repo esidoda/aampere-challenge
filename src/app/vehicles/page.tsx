@@ -7,30 +7,16 @@ import Filters from "./components/VehiclesFilters";
 import Table from "./components/VehiclesTable";
 import { VehicleTableColumn } from "./vehicles.types";
 import { useFilter } from "./hooks/useVehiclesFilter";
+import Pagination from "../components/Pagination";
 
 const VehicleListing = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>([]);
+  const [paginatedVehicles, setPaginatedVehicles] = useState<Vehicle[]>([]);
   const [filters, setFilters] = useState({} as VehicleFilters);
   const [loading, setLoading] = useState(true);
   const { filterVehicles } = useFilter();
   const hasNoData = filteredVehicles.length === 0;
-
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      const vehiclesResponse = await getVehicles();
-      setVehicles(vehiclesResponse.data);
-      setFilteredVehicles(vehiclesResponse.data);
-      setLoading(false);
-    };
-
-    fetchVehicles();
-  }, []);
-
-  useEffect(() => {
-    const filteredVehicles = filterVehicles(filters, vehicles);
-    setFilteredVehicles(filteredVehicles);
-  }, [filters, vehicles]);
 
   const tableColumns = [
     { propertyKey: "brand", header: "Brand" },
@@ -43,6 +29,37 @@ const VehicleListing = () => {
     { propertyKey: "location", header: "Location" },
   ] as VehicleTableColumn[];
 
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      const vehiclesResponse = await getVehicles();
+      setVehicles(vehiclesResponse.data);
+      setFilteredVehicles(vehiclesResponse.data);
+      setLoading(false);
+    };
+    fetchVehicles();
+  }, []);
+
+  useEffect(() => {
+    const filteredVehicles = filterVehicles(filters, vehicles);
+    setFilteredVehicles(filteredVehicles);
+  }, [filters, vehicles]);
+
+  /* Handle Pagination */
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    setPaginatedVehicles(filteredVehicles.slice(startIndex, endIndex)); // Slice the filtered vehicles based on current page
+  }, [filteredVehicles, currentPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const totalPages = Math.ceil(filteredVehicles.length / itemsPerPage);
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -50,10 +67,15 @@ const VehicleListing = () => {
       <h1 className="text-2xl font-bold mb-6">List of Vehicles</h1>
       <Filters filters={filters} setFilters={setFilters} />
       {!hasNoData ? (
-        <Table columns={tableColumns} data={filteredVehicles} />
+        <Table columns={tableColumns} data={paginatedVehicles} />
       ) : (
         <div>No vehicles available</div>
       )}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 };
