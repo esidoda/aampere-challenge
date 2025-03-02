@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Vehicle, VehicleTableColumn } from "../vehicles.types";
 import { useSort } from "../../hooks/useSort";
 import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
@@ -50,6 +50,7 @@ const VehicleTable = ({ columns, data, detailsLink }: TableProps) => {
               key={rowIndex}
               className="bg-white border-b border-gray-200 cursor-pointer hover:bg-gray-100"
               onClick={() => detailsLink(row.id)}
+              e2e-id="vehicle-row"
             >
               {columns.map((column, colIndex) => (
                 <td key={colIndex} className="px-4 py-2">

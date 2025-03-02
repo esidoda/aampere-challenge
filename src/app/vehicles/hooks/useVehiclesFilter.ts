@@ -1,6 +1,6 @@
 import { Vehicle, VehicleFilters } from "../vehicles.types";
 
-export function useFilter() {
+export function useVehicleFilters() {
   const filterVehicles = (
     filters: VehicleFilters,
     vehicles: Vehicle[]

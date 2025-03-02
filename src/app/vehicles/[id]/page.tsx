@@ -5,6 +5,7 @@ import { Vehicle } from "../vehicles.types";
 import { useParams } from "next/navigation";
 import ImageCarousel from "@/app/components/ImageCarousel";
 import { FaArrowLeft } from "react-icons/fa";
+import Link from "next/link";
 
 const VehicleDetails = () => {
   const [vehicle, setVehicle] = useState<Vehicle | null>();
@@ -28,10 +29,10 @@ const VehicleDetails = () => {
   return (
     <div className="container mx-auto p-6">
       <div className="mb-4">
-        <a href="/vehicles" className="text-blue-500 hover:underline flex items-center">
+        <Link href="/vehicles" className="text-blue-500 hover:underline flex items-center">
           <FaArrowLeft /> 
           <span className="ml-2">Back to Vehicles</span>
-        </a>
+        </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>

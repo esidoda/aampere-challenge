@@ -1,14 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getFilters, getVehicles } from "./vehicles.services";
+import { getVehicles } from "./vehicles.services";
 import { Vehicle, VehicleFilters } from "./vehicles.types";
 import Filters from "./components/VehiclesFilters";
 import Table from "./components/VehiclesTable";
 import { VehicleTableColumn } from "./vehicles.types";
-import { useFilter } from "./hooks/useVehiclesFilter";
+import { useVehicleFilters } from "./hooks/useVehiclesFilter";
 import Pagination from "../components/Pagination";
 import { useRouter } from "next/navigation";
+import { debounce } from "lodash";
 
 const VehicleListing = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -16,7 +17,7 @@ const VehicleListing = () => {
   const [paginatedVehicles, setPaginatedVehicles] = useState<Vehicle[]>([]);
   const [filters, setFilters] = useState({} as VehicleFilters);
   const [loading, setLoading] = useState(true);
-  const { filterVehicles } = useFilter();
+  const { filterVehicles } = useVehicleFilters();
   const hasNoData = filteredVehicles.length === 0;
 
   const tableColumns = [
@@ -40,10 +41,15 @@ const VehicleListing = () => {
     fetchVehicles();
   }, []);
 
-  useEffect(() => {
-    const filteredVehicles = filterVehicles(filters, vehicles);
+  const filterVehiclesDebounced = debounce(() => {
+    const filteredVehicles = filterVehicles(filters, vehicles); 
     setFilteredVehicles(filteredVehicles);
-  }, [filters, vehicles]);
+    setCurrentPage(1); 
+  }, 300);  
+
+  useEffect(() => {
+   filterVehiclesDebounced();
+  }, [filters, vehicles, filterVehiclesDebounced]);
 
   /* Handle Pagination */
   const [currentPage, setCurrentPage] = useState(1);

@@ -1,5 +1,3 @@
-import { AvailableItem, Filter } from "../types/Filters";
-
 export interface Vehicle {
   id: number;
   brand: string;
@@ -42,6 +40,6 @@ export interface FiltersResponse {
 }
 
 export interface VehicleFilters {
-  brand: string | null;
-  location: string;
+  brand?: string | null;
+  location?: string;
 }

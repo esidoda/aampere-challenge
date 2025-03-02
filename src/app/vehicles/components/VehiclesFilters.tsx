@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { FaFilter, FaTimesCircle } from "react-icons/fa";
+import { FaTimesCircle } from "react-icons/fa";
 import { FiltersResponse, VehicleFilters } from "../vehicles.types";
 import { getFilters } from "../vehicles.services";
 
@@ -12,14 +12,14 @@ type Props = {
 
 const Filters = ({ filters, setFilters }: Props) => {
   const handleBrandChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters((prev: any) => ({
+    setFilters((prev: VehicleFilters) => ({
       ...prev,
       brand: e.target.value,
     }));
   };
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters((prev: any) => ({
+    setFilters((prev: VehicleFilters) => ({
       ...prev,
       location: e.target.value,
     }));
@@ -33,7 +33,7 @@ const Filters = ({ filters, setFilters }: Props) => {
   };
 
   const handleClearBrand = () => {
-    setFilters((prev: any) => ({
+    setFilters((prev: VehicleFilters) => ({
       ...prev,
       brand: null,
     }));
