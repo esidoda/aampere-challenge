@@ -44,12 +44,12 @@ const VehicleListing = () => {
   const filterVehiclesDebounced = debounce(() => {
     const filteredVehicles = filterVehicles(filters, vehicles); 
     setFilteredVehicles(filteredVehicles);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   }, 300);  
 
   useEffect(() => {
    filterVehiclesDebounced();
-  }, [filters, vehicles, filterVehiclesDebounced]);
+  }, [filters, vehicles]);
 
   /* Handle Pagination */
   const [currentPage, setCurrentPage] = useState(1);

@@ -29,7 +29,7 @@ const VehicleDetails = () => {
   return (
     <div className="container mx-auto p-6">
       <div className="mb-4">
-        <Link href="/vehicles" className="text-blue-500 hover:underline flex items-center">
+        <Link href="/vehicles" className="text-blue-500 hover:underline flex items-center" e2e-id="back-vehicle-list-link">
           <FaArrowLeft /> 
           <span className="ml-2">Back to Vehicles</span>
         </Link>

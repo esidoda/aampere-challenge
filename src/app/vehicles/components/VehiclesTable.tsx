@@ -13,7 +13,10 @@ const VehicleTable = ({ columns, data, detailsLink }: TableProps) => {
   const { sortedItems, handleSort, sortConfig } = useSort<Vehicle>(data);
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <table
+        className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        e2e-id="vehicle-table"
+      >
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr className="bg-gray-100">
             {columns.map((column, index) => (
