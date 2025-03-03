@@ -54,20 +54,26 @@ const Filters = ({ filters, setFilters }: Props) => {
       <div className="flex items-center space-x-4 justify-between">
         <div className="flex items-center space-x-4 flex-1">
           <div className="mb-4 relative w-full">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="brandInput"
+            >
               Brand
             </label>
             <input
+              id="brandInput"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline relative"
               type="text"
               placeholder="Search by Brand"
               value={filters.brand ?? ""}
               onChange={handleBrandChange}
+              aria-label="Search by Brand"
             />
             {filters.brand && (
               <span
                 className="absolute right-3 bottom-0 transform -translate-y-1/2 cursor-pointer"
                 onClick={handleClearBrand}
+                aria-label="Clear brand filter"
               >
                 <FaTimesCircle size={20} color="#888" />
               </span>
@@ -75,14 +81,19 @@ const Filters = ({ filters, setFilters }: Props) => {
           </div>
           <div className="flex items-center space-x-4 w-full">
             <div className="mb-4 w-full">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="locationSelect"
+              >
                 Location
               </label>
               <select
+                id="locationSelect"
                 name="location"
                 value={filters.location}
                 onChange={handleLocationChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                aria-label="Select location"
               >
                 <option value="all">All Locations</option>
                 {filtersData?.locations.map((location, index) => (
@@ -97,6 +108,7 @@ const Filters = ({ filters, setFilters }: Props) => {
         <button
           className="mt-4 py-2 px-4 bg-gray-800 text-white rounded-md shadow hover:bg-blue-700 transition duration-300"
           onClick={clearFilters}
+          aria-label="Clear all filters"
         >
           Clear
         </button>

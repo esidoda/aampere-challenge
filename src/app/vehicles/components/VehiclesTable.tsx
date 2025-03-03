@@ -16,7 +16,11 @@ const VehicleTable = ({ columns, data, detailsLink }: TableProps) => {
       <table
         className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
         e2e-id="vehicle-table"
+        aria-describedby="vehicleTableDescription"
       >
+        <caption id="vehicleTableDescription" className="sr-only">
+          Vehicle table displaying sortable columns for vehicle data.
+        </caption>
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr className="bg-gray-100">
             {columns.map((column, index) => (
@@ -35,12 +39,12 @@ const VehicleTable = ({ columns, data, detailsLink }: TableProps) => {
                   {column.isSortable &&
                     (sortConfig.key === column.propertyKey ? (
                       sortConfig.direction === "asc" ? (
-                        <FaSortUp className="mt-1" />
+                        <FaSortUp className="mt-1" aria-hidden="true" />
                       ) : (
-                        <FaSortDown className="mb-1" />
+                        <FaSortDown className="mb-1" aria-hidden="true" />
                       )
                     ) : (
-                      <FaSort />
+                      <FaSort aria-hidden="true" />
                     ))}
                 </span>
               </th>
@@ -54,9 +58,15 @@ const VehicleTable = ({ columns, data, detailsLink }: TableProps) => {
               className="bg-white border-b border-gray-200 cursor-pointer hover:bg-gray-100"
               onClick={() => detailsLink(row.id)}
               e2e-id="vehicle-row"
+              aria-labelledby={`vehicle-row-${rowIndex}`}
             >
               {columns.map((column, colIndex) => (
-                <td key={colIndex} className="px-4 py-2">
+                <td
+                  key={colIndex}
+                  className="px-4 py-2"
+                  id={`vehicle-row-${rowIndex}`}
+                  aria-label={column.header}
+                >
                   {row[column.propertyKey]}
                 </td>
               ))}

@@ -29,8 +29,12 @@ const VehicleDetails = () => {
   return (
     <div className="container mx-auto p-6">
       <div className="mb-4">
-        <Link href="/vehicles" className="text-blue-500 hover:underline flex items-center" e2e-id="back-vehicle-list-link">
-          <FaArrowLeft /> 
+        <Link
+          href="/vehicles"
+          className="text-blue-500 hover:underline flex items-center"
+          e2e-id="back-vehicle-list-link"
+        >
+          <FaArrowLeft />
           <span className="ml-2">Back to Vehicles</span>
         </Link>
       </div>
@@ -40,35 +44,35 @@ const VehicleDetails = () => {
           <table className="w-full mb-4 rounded-lg">
             <tbody>
               <tr>
-                <td className="px-4 py-2 font-semibold">Brand</td>
+                <td className="py-2 font-semibold">Brand</td>
                 <td className="px-4 py-2">{vehicle.brand}</td>
               </tr>
               <tr>
-                <td className="px-4 py-2 font-semibold">Model</td>
+                <td className="py-2 font-semibold">Model</td>
                 <td className="px-4 py-2">{vehicle.model}</td>
               </tr>
               <tr>
-                <td className="px-4 py-2 font-semibold">Year</td>
+                <td className="py-2 font-semibold">Year</td>
                 <td className="px-4 py-2">{vehicle.year}</td>
               </tr>
               <tr>
-                <td className="px-4 py-2 font-semibold">Price</td>
+                <td className="py-2 font-semibold">Price</td>
                 <td className="px-4 py-2">{vehicle.price}</td>
               </tr>
               <tr>
-                <td className="px-4 py-2 font-semibold">Range (km)</td>
+                <td className="py-2 font-semibold">Range (km)</td>
                 <td className="px-4 py-2">{vehicle.range_km}</td>
               </tr>
               <tr>
-                <td className="px-4 py-2 font-semibold">Condition</td>
+                <td className="py-2 font-semibold">Condition</td>
                 <td className="px-4 py-2">{vehicle.condition}</td>
               </tr>
               <tr>
-                <td className="px-4 py-2 font-semibold">Drivetrain</td>
+                <td className="py-2 font-semibold">Drivetrain</td>
                 <td className="px-4 py-2">{vehicle.drivetrain}</td>
               </tr>
               <tr>
-                <td className="px-4 py-2 font-semibold">Location</td>
+                <td className="py-2 font-semibold">Location</td>
                 <td className="px-4 py-2">{vehicle.location}</td>
               </tr>
             </tbody>
@@ -85,29 +89,27 @@ const VehicleDetails = () => {
         <table className="w-full rounded-lg">
           <tbody>
             <tr>
-              <td className="px-4 py-2 font-semibold">
-                Battery Capacity (kWh)
-              </td>
+              <td className="py-2 font-semibold">Battery Capacity (kWh)</td>
               <td className="px-4 py-2">{vehicle.battery_capacity_kWh}</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 font-semibold">Charging Speed (kW)</td>
+              <td className="py-2 font-semibold">Charging Speed (kW)</td>
               <td className="px-4 py-2">{vehicle.charging_speed_kW}</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 font-semibold">Autopilot</td>
+              <td className="py-2 font-semibold">Autopilot</td>
               <td className="px-4 py-2">{vehicle.autopilot ? "Yes" : "No"}</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 font-semibold">Kilometer Count</td>
+              <td className="py-2 font-semibold">Kilometer Count</td>
               <td className="px-4 py-2">{vehicle.kilometer_count}</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 font-semibold">Accidents</td>
+              <td className="py-2 font-semibold">Accidents</td>
               <td className="px-4 py-2">{vehicle.accidents ? "Yes" : "No"}</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 font-semibold">Accident Description</td>
+              <td className="py-2 font-semibold">Accident Description</td>
               <td className="px-4 py-2">
                 {vehicle.accident_description || "N/A"}
               </td>

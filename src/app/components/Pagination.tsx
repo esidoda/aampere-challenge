@@ -9,7 +9,6 @@ const Pagination = ({
   totalPages,
   handlePageChange,
 }: PaginationProps) => {
-    
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
@@ -26,6 +25,7 @@ const Pagination = ({
                 ? "text-white bg-gray-800"
                 : "text-black hover:bg-gray-300"
             }`}
+            aria-label={`Go to page ${page}`}
           >
             {page}
           </button>

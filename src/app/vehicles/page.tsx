@@ -31,6 +31,7 @@ const VehicleListing = () => {
     { propertyKey: "location", header: "Location" },
   ] as VehicleTableColumn[];
 
+  // Fetch and store vehicles initially
   useEffect(() => {
     const fetchVehicles = async () => {
       const vehiclesResponse = await getVehicles();
@@ -41,14 +42,18 @@ const VehicleListing = () => {
     fetchVehicles();
   }, []);
 
+  // Debounced function for filtering vehicles
   const filterVehiclesDebounced = debounce(() => {
-    const filteredVehicles = filterVehicles(filters, vehicles); 
+    const filteredVehicles = filterVehicles(filters, vehicles);
     setFilteredVehicles(filteredVehicles);
     setCurrentPage(1);
-  }, 300);  
+  }, 300);
 
   useEffect(() => {
-   filterVehiclesDebounced();
+    filterVehiclesDebounced();
+    return () => {
+      filterVehiclesDebounced.cancel();
+    };
   }, [filters, vehicles]);
 
   /* Handle Pagination */
@@ -56,6 +61,7 @@ const VehicleListing = () => {
   const itemsPerPage = 15;
 
   useEffect(() => {
+    // Calculate pagination on filtered vehicles
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     setPaginatedVehicles(filteredVehicles.slice(startIndex, endIndex));
