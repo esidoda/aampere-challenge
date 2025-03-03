@@ -63,3 +63,11 @@ npm run start
 ```bash
 npm run test:e2e
 ```
+
+If you encounter errors while running End-to-End (E2E) tests, try installing Playwright dependencies with the following command:
+
+```bash
+npx playwright install
+```
+
+This ensures that all required browsers and dependencies are installed correctly.
